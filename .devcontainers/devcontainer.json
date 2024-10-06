@@ -1,0 +1,21 @@
+{
+    "name": "ESP-IDF Dev",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "service": "esp-idf",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "espressif.esp-idf-extension"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }
+        }
+    },
+    "remoteUser": "root",
+    "postCreateCommand": "./entrypoint.sh"
+}
