@@ -127,7 +127,7 @@ Here is a summary of key commands used in the development process:
 
 5. **Change to Project Directory and Fix Permissions**:
    - `cd firmware`: Changes to the newly created project directory.
-   - `sudo chown -R $USER:$USER /home/luist/esp_secureRF/firmware`: Changes the ownership of the project files to the current user to prevent permission issues.
+   - `sudo chown -R $USER:$USER /home/<username>/<workspace>/firmware`: Changes the ownership of the project files to the current user to prevent permission issues.
 
 6. **Set Target for Development**:
    - `idf.py set-target esp32`: Sets the target microcontroller to `esp32`, ensuring the correct tools and configurations are used for development.
