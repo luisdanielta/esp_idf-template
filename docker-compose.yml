@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  esp-idf:
+    build: .  # Build the Docker image using the Dockerfile in the current directory
+    image: esp-idf  # Name the resulting image 'esp-idf'
+    container_name: esp-idf-container  # Name the running container 'esp-idf-container'
+    volumes:
+      - .:/workspace:rw  # Mount the current directory to '/workspace' inside the container with read/write permissions
+      - esp-idf-tools:/root/.espressif  # Persist ESP-IDF tools across container runs using a named volume
+    environment:
+      - IDF_PATH=/opt/esp/idf  # Set the IDF_PATH environment variable to define the location of ESP-IDF
+      - IDF_TOOLS_PATH=/opt/esp  # Set the IDF_TOOLS_PATH variable to specify the tools installation path
+    tty: true  # Keep the container's terminal open, allowing for interactive sessions
+    stdin_open: true  # Enable stdin input, useful for interactive processes
+    command: /bin/bash  # Set the default command to open a Bash shell
+
+volumes:
+  esp-idf-tools:  # Define a named volume to store ESP-IDF tools, allowing reuse between different container runs
