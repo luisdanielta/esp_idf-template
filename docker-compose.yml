@@ -2,23 +2,33 @@ version: '3'
 
 services:
   coder-server:
-    image: coder_esp32  # Reemplaza con el nombre de tu imagen
-    container_name: coder32-esp-idf
+    image: code_esp_idf
+    container_name: code_esp_bt32
     restart: unless-stopped
+    networks:
+      pihole_net:
+        ipv4_address: 192.168.2.11
+    dns:
+      - 192.168.2.2
     ports:
-      - "9050:8080"  # Exponer code-server en el puerto 9010
+      - "3232:8080"
+      - "3233:9000"
     volumes:
-      - coder32_data:/home/coder/project  # Montar los datos del proyecto
-      - coder32_config:/home/coder/.config  # Montar la configuración de code-server
+      - code_esp_bt32:/home/coder/project
+      - code_esp_bt32_config:/home/coder/.config
     environment:
-      - PASSWORD=pwd  # Establece la contraseña de code-server
-      - DOCKER_USER=${USER}  # Establece el usuario de Docker
-      - IDF_PATH=/opt/esp/idf  # Variables de entorno de ESP-IDF
+      - PASSWORD=3956
+      - DOCKER_USER=${USER}
+      - IDF_PATH=/opt/esp/idf
       - IDF_TOOLS_PATH=/opt/esp
-    tty: true  # Mantener el contenedor interactivo
-    stdin_open: true  # Habilitar stdin para sesiones interactivas
+    tty: true
+    stdin_open: true
     user: "${UID}:${GID}"
 
 volumes:
-  coder32_data:
-  coder32_config:
+  code_esp_bt32:
+  code_esp_bt32_config:
+
+networks:
+  pihole_net:
+    external: true
